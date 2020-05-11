@@ -1,17 +1,13 @@
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer} = require('apollo-server-express');
 const express = require('express');
 const app = express();
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
+require('dotenv').config();
+const db = require('./db');
+const DB_HOST = process.env.DB_HOST;
 const port = process.env.PORT || 4000;
-const typeDefs = gql`
-    type Query {
-        hello: String
-    }
-`;
-const resolvers = {
-    Query: {
-        hello: () => 'Hello my lover!'
-    }
-};
+db.connect(DB_HOST);
 const server = new ApolloServer({
     typeDefs,
     resolvers
