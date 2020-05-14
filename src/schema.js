@@ -6,6 +6,9 @@ module.exports = gql`
   type Query {
     notes:[Note!]!
     note(id:ID!):Note!
+    user(username:String!):User
+    users:[User!]!
+    me:User!
   }
   type User {
     id:ID!
@@ -13,6 +16,7 @@ module.exports = gql`
     email:String!
     avatar:String
     notes:[Note!]!
+    favorites:[Note!]!
   }
   type Note {
     id:ID!
@@ -20,6 +24,8 @@ module.exports = gql`
     author:User!
     createdAt:DateTime!
     updatedAt:DateTime!
+    favoriteCount:Int!
+    favoritedBy:[User!]
   }
   type Mutation {
     newNote(content:String!):Note!
@@ -28,5 +34,6 @@ module.exports = gql`
     passwordEncrypt(passowrd:String!):String!
     signUp(username: String!, email: String!, password: String!): String!
     signIn(username:String,email:String,password:String!):String!
+    toggleFavorite(id:ID!):Note!
   }
 `;
