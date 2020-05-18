@@ -21,6 +21,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "nodemon src/index.js",
     "dev": "nodemon src/index.js"
   },
   "author": "",
